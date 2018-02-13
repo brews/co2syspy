@@ -398,7 +398,7 @@ def CO2SYS(PAR1, PAR2, PAR1TYPE, PAR2TYPE, SAL, TEMPIN, TEMPOUT, PRESIN, PRESOUT
         TCc[F] = CalculateTCfromTApH(TAc[F] - PengCorrection[F], PHic[F])
     F = Icase == 23  # input TC, pH
     if np.any(F):
-        TAc[F] = CalculateTAforTCpH(TCc[F], PHic[F]) + PengCorrection[F]
+        TAc[F] = CalculateTAfromTCpH(TCc[F], PHic[F]) + PengCorrection[F]
         FCic[F] = CalculatefCO2fromTCpH(TCc[F], PHic[F])
     F = Icase == 24 or Icase == 25  # input TC, (pCO2 or fCO2)
     if np.any(F):
@@ -619,7 +619,7 @@ def Constants(TempC, Pdbar):
         # given here
     F = WhichKs != 6 and WhichKs != 7 and WhichKs != 8  # All other cases
     if np.any(F):
-        FF = F and (WhoseKSO4 == 1 or WhoseKS04 ==2)  # If user opted for Uppstrom's values:
+        FF = F and (WhoseKSO4 == 1 or WhoseKSO4 ==2)  # If user opted for Uppstrom's values:
         if np.any(FF):
             # Uppstrom, L., Deep-Sea Research 21:161-162, 1974:
             # this is .000416.*Sali./35. = .0000119.*Sali
@@ -795,7 +795,7 @@ def Constants(TempC, Pdbar):
 
     F = WhichKs == 7
     if np.any(F):
-        KP[F] = 0.02
+        KP1[F] = 0.02
         # Peng et al don't include the contribution from this term,
         # but it is so small it doesn't contribute. It needs to be
         # kept so that the routines work ok.
@@ -956,7 +956,7 @@ def Constants(TempC, Pdbar):
         # The 2s precision in pK2 is .008, or 2% in K2.
         pK1[F] = (-13.7201 + 0.031334 * TempK[F] + 3235.76 / TempK[F]
                   + 1.3e-5 * Sal[F] * TempK[F] - 0.1032 * Sal[F] ** 0.5)
-        K1[F] = (10 **-pK1(F)         # this is on the NBS scale
+        K1[F] = (10 ** -pK1(F)         # this is on the NBS scale
                  / fH[F])                 # convert to SWS scale
         pK2[F] = (5371.9645 + 1.671221 * TempK[F] + 0.22913 * Sal[F] + 18.3802 * np.log10(Sal[F])
                   - 128375.28 / TempK[F] - 2194.3055 * np.log10(TempK[F]) - 8.0944e-4 * Sal[F] * TempK[F]
@@ -1518,7 +1518,7 @@ def CalculateTCfromTApH(TAx, pHx):
     CAlk = TAx - BAlk - OH - PAlk - SiAlk + Hfree + HSO4 + HF
     TCxtemp = CAlk * (H * H + K1F * H + K1F * K2F) / (K1F * (H + 2 * K2F))
 
-    return Tcxtemp
+    return TCxtemp
 
 
 def CalculatepHfromTAfCO2(TAi, fCO2i):
@@ -1555,7 +1555,7 @@ def CalculatepHfromTAfCO2(TAi, fCO2i):
     pHGuess = 8  # First guess
     pHTol = 0.0001  # Tolerance
     ln10 = np.log(10)
-    pH[:vl] = pHGuess
+    pH = pHGuess
     deltapH = pHTol + pH
 
     while np.any(np.abs(deltapH) > pHTol):
@@ -1577,14 +1577,14 @@ def CalculatepHfromTAfCO2(TAi, fCO2i):
         # find Slope dTA/dpH
         # (This is not exact, but keeps all important terms)
         Slope = ln10 * (HCO3 + 4 * CO3 + BAlk * H / (KBF + H) + OH + H)
-        deltapH = Residaual / Slope  # This is Newton's method
+        deltapH = Residual / Slope  # This is Newton's method
 
         # To keep the jump from being too big:
-        while np.any(np.abs(delatpH) > 1):
+        while np.any(np.abs(deltapH) > 1):
             FF = np.abs(deltapH) > 1
             deltapH[FF] = deltapH[FF] / 2
 
-        pH = pH + deltaPh
+        pH = pH + deltapH
 
     return pH
 
