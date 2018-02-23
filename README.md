@@ -15,21 +15,21 @@ First, import the package:
     
 Use the old-school interface with `co2sys.CO2SYS()`. First, lets setup some variables to input:
 
-    par1type =    1  # The first parameter supplied is of type "1", which is "alkalinity"
-    par2type =    2  # The first parameter supplied is of type "2", which is "DIC"
-    par3type =    3  # The first parameter supplied is of type "3", which is "pH"
-    presin   =    4.036785269144779e3  # Pressure at input conditions
-    tempout  =    0  # Temperature at output conditions.
-    presout  =    0  # Pressure    at output conditions.
-    pHscale  =    1  # pH scale at which the input pH is reported ("1" means "Total Scale")
-    k1k2c    =    4  # Choice of H2CO3 and HCO3- dissociation constants K1 and K2 ("4" means "Mehrbach refit")
-    kso4c    =    1  # Choice of HSO4- dissociation constants KSO4 ("1" means "Dickson")
-    alk_s = 2.337701660156250e3
-    dic_s = 2.186364257812500e3
-    sal_s = 34.875812530517578
+    par1type = 1  # The first parameter supplied is of type "1", which is "alkalinity"
+    par2type = 2  # The first parameter supplied is of type "2", which is "DIC"
+    par3type = 3  # The first parameter supplied is of type "3", which is "pH"
+    presin   = 4.036785269144779e3  # Pressure at input conditions
+    tempout  = 0  # Temperature at output conditions.
+    presout  = 0  # Pressure    at output conditions.
+    pHscale  = 1  # pH scale at which the input pH is reported ("1" means "Total Scale")
+    k1k2c    = 4  # Choice of H2CO3 and HCO3- dissociation constants K1 and K2 ("4" means "Mehrbach refit")
+    kso4c    = 1  # Choice of HSO4- dissociation constants KSO4 ("1" means "Dickson")
+    alk_s  = 2.337701660156250e3
+    dic_s  = 2.186364257812500e3
+    sal_s  = 34.875812530517578
     temp_s = 2.197510004043579
-    si_s = 49.758834838867188
-    p_s = 1.458118438720703
+    si_s   = 49.758834838867188
+    p_s    = 1.458118438720703
 
 Now, take all of this and run with it:
 
