@@ -4,6 +4,9 @@ import co2sys
 
 
 def test_CO2SYS():
+    """Very basic smoke test for CO2SYS
+    """
+
     # Conditions used in Mg/Ca forward model test case.
     par1type =    1 # The first parameter supplied is of type "1", which is "alkalinity"
     par2type =    2 # The first parameter supplied is of type "2", which is "DIC"
@@ -23,7 +26,7 @@ def test_CO2SYS():
 
     out, niceheaders = co2sys.CO2SYS(alk_s, dic_s, par1type, par2type, sal_s, temp_s, tempout, presin, presout, si_s, p_s, pHscale, k1k2c, kso4c)
 
-    # Testing against CO2SYS (MATLAB v1.1)
+    # Testing against CO2SYS (MATLAB v1.1) - God save us all.
     np.testing.assert_allclose(out['TAlk'], 2.337701660156250e+03, atol=1e-8)
     np.testing.assert_allclose(out['TCO2'], 2.186364257812500e+03, atol=1e-8)
     np.testing.assert_allclose(out['pHin'], 7.926358670659251, atol=1e-8)
