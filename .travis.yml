@@ -41,10 +41,11 @@ before_install:
 install:
   - conda env create -q -f ci/requirements-$CONDA_ENV.yml
   - source activate test_env
-  - pip install .
+  - pip install --no-deps -e .
 
 script:
-  - pytest --pyargs co2sys
+  - python -OO -c "import co2sys"
+  - py.test --pyargs co2sys --cov=co2sys --cov-config ci/.coveragerc --cov-report term-missing --verbose $EXTRA_FLAGS
 
 after_success:
   - coveralls

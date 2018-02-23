@@ -1,0 +1,2 @@
+[report]
+omit = co2sys/tests/*
