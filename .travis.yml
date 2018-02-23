@@ -45,3 +45,6 @@ install:
 
 script:
   - pytest --pyargs co2sys
+
+after_success:
+  - coveralls

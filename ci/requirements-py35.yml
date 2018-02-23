@@ -5,8 +5,10 @@ channels:
 dependencies:
 - attrs
 - coverage
+- coveralls
 - docutils
 - numpy
 - pytest
+- pytest-cov
 - python=3.5
 - tox
