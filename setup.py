@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='co2syspy',
-    version='0.0.1',
+    version='0.0.1a0',
     description='A Python interpretation of CO2SYS',
     license='GPLv3',
 
