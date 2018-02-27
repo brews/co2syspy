@@ -26,7 +26,7 @@ setup(
         # that you indicate whether you support Python 2, Python 3 or both.
         'Programming Language :: Python :: 3',
     ],
-    keywords='marine chemistry ocean co2',
+    keywords='marine chemistry ocean seawater carbonate',
 
     packages=find_packages(exclude=['docs']),
 
