@@ -56,7 +56,7 @@ conda install co2syspy -c sbmalev
 Install with `pip`, directly from the master branch using:
 
 ```bash
-pip install git+git://github.com/brews/co2syspy.git@master
+pip install co2syspy
 ```    
 
 ## Support and development
