@@ -53,7 +53,7 @@ Install `co2syspy` from `conda` with:
 conda install co2syspy -c sbmalev
 ```
 
-Install with `pip`, directly from the master branch using:
+Install with `pip` using:
 
 ```bash
 pip install co2syspy
